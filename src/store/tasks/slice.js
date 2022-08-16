@@ -23,14 +23,17 @@ const tasksSlice = createSlice({
         ? (state.showCompletedTasks = false)
         : (state.showCompletedTasks = true);
     },
-
+    //completed: !task.completed
     toggleCompleted: (state, action) => {
       const id = action.payload;
-      if (state.tasks.find((task) => task.id === id).completed) {
-        state.tasks.find((task) => task.id === id).completed = false;
-      } else {
-        state.tasks.find((task) => task.id === id).completed = true;
-      }
+      // if (state.tasks.find((task) => task.id === id).completed) {
+      //   state.tasks.find((task) => task.id === id).completed = false;
+      // } else {
+      //   state.tasks.find((task) => task.id === id).completed = true;
+      // }
+      state.tasks.find((task) => task.id === id).completed = !state.tasks.find(
+        (task) => task.id === id
+      ).completed;
     },
     addTask: (state, action) => {
       if (state.tasks.length >= 20) return;
