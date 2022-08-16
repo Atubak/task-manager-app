@@ -9,6 +9,7 @@ import {
   toggleCompleted,
   deleteTask,
   toggleShowCompletedButton,
+  changeMaxTasks,
 } from "../store/tasks/slice";
 
 export default function TaskList() {
@@ -22,6 +23,16 @@ export default function TaskList() {
 
   return (
     <div id="TaskList" style={{ backgroundColor: "beige" }}>
+      <label>
+        max task amount:
+        <input
+          type="number"
+          min={1}
+          max={99}
+          value={fullTaskState.maxTasks}
+          onChange={(e) => dispatch(changeMaxTasks(e.target.value))}
+        />
+      </label>
       <ul>
         {renderList.map((task) => (
           <li key={task.id} style={{ margin: "20px", border: "1px solid" }}>

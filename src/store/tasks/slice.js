@@ -15,6 +15,9 @@ const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
+    changeMaxTasks: (state, action) => {
+      state.maxTasks = action.payload;
+    },
     toggleShowCompletedButton: (state) => {
       state.showCompletedTasks === true
         ? (state.showCompletedTasks = false)
@@ -54,6 +57,7 @@ export const {
   deleteTask,
   toggleCompleted,
   toggleShowCompletedButton,
+  changeMaxTasks,
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
