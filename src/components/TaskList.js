@@ -5,7 +5,11 @@ import {
 } from "../store/tasks/selectors";
 
 import { useDispatch } from "react-redux";
-import { toggleCompleted } from "../store/tasks/slice";
+import {
+  toggleCompleted,
+  deleteTask,
+  toggleShowCompletedButton,
+} from "../store/tasks/slice";
 
 export default function TaskList() {
   const dispatch = useDispatch();
@@ -21,7 +25,10 @@ export default function TaskList() {
       <ul>
         {renderList.map((task) => (
           <li key={task.id} style={{ margin: "20px", border: "1px solid" }}>
-            <p>{task.task}</p>
+            <p>
+              {task.task}{" "}
+              <button onClick={() => dispatch(deleteTask(task.id))}>X</button>
+            </p>{" "}
             <label>
               <small>completed?</small>
               <input
@@ -33,6 +40,9 @@ export default function TaskList() {
           </li>
         ))}
       </ul>
+      <button onClick={() => dispatch(toggleShowCompletedButton())}>
+        show/hide completed tasks
+      </button>
     </div>
   );
 }
