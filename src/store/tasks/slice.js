@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   maxTasks: 20,
@@ -31,9 +31,23 @@ const tasksSlice = createSlice({
       // } else {
       //   state.tasks.find((task) => task.id === id).completed = true;
       // }
-      state.tasks.find((task) => task.id === id).completed = !state.tasks.find(
-        (task) => task.id === id
-      ).completed;
+
+      //could also do it like this:
+      // state.tasks.find((task) => task.id === id).completed = !state.tasks.find(
+      //   (task) => task.id === id
+      // ).completed;
+
+      //or like this:
+      state.tasks.forEach((task) => {
+        if (task.id === id) task.completed = !task.completed;
+      });
+
+      //or like this:
+      // state.tasks.forEach((task) => {
+      //   if (task.id !== id) return;
+
+      //   task.completed = !task.completed;
+      // })
     },
     addTask: (state, action) => {
       if (state.tasks.length >= 20) return;
